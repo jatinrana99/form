@@ -34,7 +34,7 @@
  
     <tr v-for="(item,index) in info " v-bind:key="index">
         
-        <td :style="tdStyle"> {{ item.fname }} </td>
+        <td :class="{red: isRed}"> {{ item.fname }} </td>
         <td :class="{red: isRed}"> {{ item.lname }} </td>
         <td :class="{red: isRed}"> {{ item.address }} </td>
         
