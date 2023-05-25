@@ -2,18 +2,28 @@
 <h1>APPLICATION FORM</h1>
 
 <!-- form code -->
-<form v-on:submit.prevent>
-First Name <input type="text" placeholder="Enter First Name" v-model="fname">
-Last Name <input type="text" placeholder="Enter Last Name"  v-model="lname">
-Address <input type="text" placeholder="Enter Address" v-model="address">
+<section>
+    <form v-on:submit.prevent>
+        <div>
+            First Name <input type="text" placeholder="Enter First Name" v-model="fname">
+        </div>
+        <div>
+            Last Name <input type="text" placeholder="Enter Last Name"  v-model="lname">
+        </div>
+        <div>
+            
+            Address <input type="text" placeholder="Enter Address" v-model="address">
+        </div>
 <button v-on:click="getFormData()" type="button">ADD</button>
 <!-- <button>Update</button> -->
 <!-- update and delete button is not working , I have to work on it -->
-</form>
+</form>    
+</section>
+
 
 
 <!-- for displaying the data -->
-<table>
+<b-table>
     <tr>
     <th>First Name</th>
     <th>Last Name</th>
@@ -24,20 +34,21 @@ Address <input type="text" placeholder="Enter Address" v-model="address">
  
     <tr v-for="(item,index) in info " v-bind:key="index">
         
-        <td :class="{red: isRed}"> {{ item.fname }} </td>
+        <td :style="tdStyle"> {{ item.fname }} </td>
         <td :class="{red: isRed}"> {{ item.lname }} </td>
         <td :class="{red: isRed}"> {{ item.address }} </td>
-
         
+
+
         <td>
             <input v-on:click="isRed=!isRed" type="checkbox"/>
         </td>
     <td>
-            <button v-on:click.prevent="deleteFormData(index) "> Delete </button>
+            <button v-on:click.prevent="deleteFormData(index) "> X </button>
         </td>
 
     </tr>
-</table>
+</b-table>
 </template>
 
 
@@ -47,9 +58,10 @@ Address <input type="text" placeholder="Enter Address" v-model="address">
 
     export default{
         name:`ApplicationForm`,
-        // props:{
-        //     fname
-        // },
+        bgColor: {
+      type: String,
+      default: "#41b883"
+    },
         data(){
             return{   
             fname:"",
@@ -57,6 +69,7 @@ Address <input type="text" placeholder="Enter Address" v-model="address">
             address:"",
             info:[ ],
             isRed:false,
+            activeColor:'red'
             }
         },
         methods: {
@@ -76,7 +89,13 @@ Address <input type="text" placeholder="Enter Address" v-model="address">
                 
             },
 
-
+            },
+            computed:{
+                tdStyle(){
+                    return{
+                        "background-color":this.bgColor
+                    }
+                }
             }
         }
     
@@ -94,12 +113,18 @@ table{
     
 }
 th{
-    border: solid green;
+    border: solid 2px;
 }
 td{
-    border: solid yellow;
+    border: solid 2px;
+    background-color: rgb(188, 188, 102);
 }
 .red {
   color: red;
+}
+
+section div{
+    margin: 12px;
+    padding: 4px;
 }
 </style>
