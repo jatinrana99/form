@@ -7,8 +7,7 @@ First Name <input type="text" placeholder="Enter First Name" v-model="fname">
 Last Name <input type="text" placeholder="Enter Last Name"  v-model="lname">
 Address <input type="text" placeholder="Enter Address" v-model="address">
 <button v-on:click="getFormData()" type="button">ADD</button>
-<!-- <button>Update</button>
-<button v-on:click="deleteFormData()" type="button">Delete</button> -->
+<!-- <button>Update</button> -->
 <!-- update and delete button is not working , I have to work on it -->
 </form>
 
@@ -20,6 +19,7 @@ Address <input type="text" placeholder="Enter Address" v-model="address">
     <th>Last Name</th>
     <th>Address</th>
     <th>Color</th>
+    <th>Delete</th>
     </tr>
  
     <tr v-for="(item,index) in info " v-bind:key="index">
@@ -27,8 +27,13 @@ Address <input type="text" placeholder="Enter Address" v-model="address">
         <td :class="{red: isRed}"> {{ item.fname }} </td>
         <td :class="{red: isRed}"> {{ item.lname }} </td>
         <td :class="{red: isRed}"> {{ item.address }} </td>
+
+        
         <td>
-            <input v-on:click="isRed=!isRed" type="button"/>
+            <input v-on:click="isRed=!isRed" type="checkbox"/>
+        </td>
+    <td>
+            <button v-on:click.prevent="deleteFormData(index) "> Delete </button>
         </td>
 
     </tr>
@@ -50,7 +55,7 @@ Address <input type="text" placeholder="Enter Address" v-model="address">
             fname:"",
             lname :"",
             address:"",
-            info:[],
+            info:[ ],
             isRed:false,
             }
         },
@@ -64,9 +69,12 @@ Address <input type="text" placeholder="Enter Address" v-model="address">
                 
                 this.address = "";
             },
-            // deleteFormData(){
+            deleteFormData(index){
+                
+                    this.info.splice(index,1);
 
-            // },
+                
+            },
 
 
             }
@@ -80,6 +88,10 @@ Address <input type="text" placeholder="Enter Address" v-model="address">
 <style scoped>
 table{
     border : solid brown;
+    position: absolute;
+    width: 1045px;
+    left: 170px;
+    
 }
 th{
     border: solid green;
