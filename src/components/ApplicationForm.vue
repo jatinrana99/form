@@ -6,7 +6,7 @@
 First Name <input type="text" placeholder="Enter First Name" v-model="fname">
 Last Name <input type="text" placeholder="Enter Last Name"  v-model="lname">
 Address <input type="text" placeholder="Enter Address" v-model="address">
-<button v-on:click="getFormData()" type="button">Add</button>
+<button v-on:click="getFormData()" type="button">ADD</button>
 <!-- <button>Update</button>
 <button v-on:click="deleteFormData()" type="button">Delete</button> -->
 <!-- update and delete button is not working , I have to work on it -->
@@ -24,9 +24,13 @@ Address <input type="text" placeholder="Enter Address" v-model="address">
  
     <tr v-for="(item,index) in info " v-bind:key="index">
         
-        <td> {{ item.fname }} </td>
-        <td>{{ item.lname }}</td>
-        <td>{{ item.address }}</td>
+        <td :class="{red: isRed}"> {{ item.fname }} </td>
+        <td :class="{red: isRed}"> {{ item.lname }} </td>
+        <td :class="{red: isRed}"> {{ item.address }} </td>
+        <td>
+            <input v-on:click="isRed=!isRed" type="button"/>
+        </td>
+
     </tr>
 </table>
 </template>
@@ -46,7 +50,8 @@ Address <input type="text" placeholder="Enter Address" v-model="address">
             fname:"",
             lname :"",
             address:"",
-            info:[ ],
+            info:[],
+            isRed:false,
             }
         },
         methods: {
@@ -62,9 +67,7 @@ Address <input type="text" placeholder="Enter Address" v-model="address">
             // deleteFormData(){
 
             // },
-                // num(index){
-                //     return index
-                // }
+
 
             }
         }
@@ -76,6 +79,15 @@ Address <input type="text" placeholder="Enter Address" v-model="address">
 
 <style scoped>
 table{
-    border : solid;
+    border : solid brown;
+}
+th{
+    border: solid green;
+}
+td{
+    border: solid yellow;
+}
+.red {
+  color: red;
 }
 </style>
