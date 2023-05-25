@@ -6,20 +6,28 @@
 First Name <input type="text" placeholder="Enter First Name" v-model="fname">
 Last Name <input type="text" placeholder="Enter Last Name"  v-model="lname">
 Address <input type="text" placeholder="Enter Address" v-model="address">
-<button v-on:click="getFormData" type="button">Add</button>
-<button>Update</button>
-<button>Delete</button>
+<button v-on:click="getFormData()" type="button">Add</button>
+<!-- <button>Update</button>
+<button v-on:click="deleteFormData()" type="button">Delete</button> -->
 <!-- update and delete button is not working , I have to work on it -->
 </form>
 
 
 <!-- for displaying the data -->
 <table>
-    <tc v-for="(item,index) in info" v-bind:key="index">
-       <td>
-        {{ item }}
-       </td> 
-    </tc>
+    <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Address</th>
+    <th>Color</th>
+    </tr>
+ 
+    <tr v-for="(item,index) in info " v-bind:key="index">
+        
+        <td> {{ item.fname }} </td>
+        <td>{{ item.lname }}</td>
+        <td>{{ item.address }}</td>
+    </tr>
 </table>
 </template>
 
@@ -38,25 +46,26 @@ Address <input type="text" placeholder="Enter Address" v-model="address">
             fname:"",
             lname :"",
             address:"",
-            info:[
-
-            ]
+            info:[ ],
             }
         },
         methods: {
             getFormData(){
                 console.warn(this.fname , this.lname , this.address);
-                this.info.push(this.fname);
+                this.info.push({'fname':this.fname,'lname': this.lname,'address':this.address});
                 this.fname = "";
-                this.info.push(this.lname);
+
                 this.lname = "";
-                this.info.push(this.address);
+                
                 this.address = "";
             },
-            // cond(){
-            //     if(tc<=3){
-                    
-            //     }
+            // deleteFormData(){
+
+            // },
+                // num(index){
+                //     return index
+                // }
+
             }
         }
     
@@ -66,5 +75,7 @@ Address <input type="text" placeholder="Enter Address" v-model="address">
 
 
 <style scoped>
-
+table{
+    border : solid;
+}
 </style>
