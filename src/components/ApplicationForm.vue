@@ -153,6 +153,7 @@ section div{
     padding: 4px;
 }
 
+
 .my::v-deep .my1 {
   background-color: aqua;
   margin: 5px;
