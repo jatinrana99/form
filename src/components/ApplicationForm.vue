@@ -1,6 +1,8 @@
 <template>
-<h1>APPLICATION FORM</h1>
-
+    <h1>APPLICATION FORM</h1>
+    <BaseButton name="Reverse the Name"/>
+    <BaseButton :Message="getMessage" name="Alert"></BaseButton>
+   
 <!-- form code -->
 <section>
     <form v-on:submit.prevent>
@@ -54,19 +56,24 @@
 
     </tr>
 </table>
+
+
 </template>
 
 
 <script>
+import BaseButton from './BaseButton.vue'
 
 
 
     export default{
         name:`ApplicationForm`,
-        bgColor: {
-      type: String,
-      default: "#41b883"
-    },
+        components:{
+            BaseButton
+        },
+        props:{
+
+        },
         data(){
             return{   
             fname:"",
@@ -76,6 +83,12 @@
             isRed:false,
             activeColor:'red',
             clickColor:true,
+            getName: function(){
+                return {
+                    name1:`alert`,
+                    name2:'alert4'
+                }
+            }
             
             }
         },
@@ -95,6 +108,10 @@
 
                 
             },
+
+            getMessage(){
+                alert("Hello from parent");
+            }
 
             },
             computed:{
@@ -133,5 +150,10 @@ td{
 section div{
     margin: 12px;
     padding: 4px;
+}
+
+
+.my::v-deep .my1 {
+  background-color: aqua;
 }
 </style>
