@@ -1,6 +1,10 @@
 <template>
-<h1>APPLICATION FORM</h1>
-
+    <h1>APPLICATION FORM</h1>
+    <BaseButton :alert="reverseMessage"  name="Reverse the Name"  />
+    <p>Your Current String : {{ message }}</p>
+    <input type="text" v-model="message">
+    <BaseButton  :alert="getMessage" name="Alert"></BaseButton>
+   
 <!-- form code -->
 <section>
     <form v-on:submit.prevent>
@@ -54,29 +58,35 @@
 
     </tr>
 </table>
+
+<br>
+<br>
+<!-- <button v-on:click="reverseMessage">Reverse Message</button> -->
+
 </template>
 
 
 <script>
+import BaseButton from './BaseButton.vue'
 
 
 
     export default{
         name:`ApplicationForm`,
-        bgColor: {
-      type: String,
-      default: "#41b883"
-    },
+        components:{
+            BaseButton
+        },
         data(){
             return{   
-            fname:"",
-            lname :"",
-            address:"",
-            info:[ ],
-            isRed:false,
-            activeColor:'red',
-            clickColor:true,
-            
+                fname:"",
+                lname :"",
+                address:"",
+                info:[ ],
+                isRed:false,
+                activeColor:'red',
+                clickColor:true,
+                // message: "I Am Developer",
+                message:""
             }
         },
         methods: {
@@ -95,6 +105,14 @@
 
                 
             },
+
+            getMessage(){
+                alert("Hello from parent");
+            },
+            reverseMessage: function() {
+              this.message = this.message.split('').reverse().join('');
+              
+        }
 
             },
             computed:{
@@ -133,5 +151,15 @@ td{
 section div{
     margin: 12px;
     padding: 4px;
+}
+
+
+.my::v-deep .my1 {
+  background-color: aqua;
+  margin: 5px;
+  border:2px solid;
+  border-radius: 29%;
+  height: 78px;
+  width: 135px;
 }
 </style>
