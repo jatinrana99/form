@@ -1,7 +1,9 @@
 <template>
     <h1>APPLICATION FORM</h1>
-    <BaseButton name="Reverse the Name"/>
-    <BaseButton :Message="getMessage" name="Alert"></BaseButton>
+    <BaseButton :alert="reverseMessage"  name="Reverse the Name"  />
+    <p>Your Current String : {{ message }}</p>
+    <input type="text" v-model="message">
+    <BaseButton  :alert="getMessage" name="Alert"></BaseButton>
    
 <!-- form code -->
 <section>
@@ -57,6 +59,9 @@
     </tr>
 </table>
 
+<br>
+<br>
+<!-- <button v-on:click="reverseMessage">Reverse Message</button> -->
 
 </template>
 
@@ -71,25 +76,17 @@ import BaseButton from './BaseButton.vue'
         components:{
             BaseButton
         },
-        props:{
-
-        },
         data(){
             return{   
-            fname:"",
-            lname :"",
-            address:"",
-            info:[ ],
-            isRed:false,
-            activeColor:'red',
-            clickColor:true,
-            getName: function(){
-                return {
-                    name1:`alert`,
-                    name2:'alert4'
-                }
-            }
-            
+                fname:"",
+                lname :"",
+                address:"",
+                info:[ ],
+                isRed:false,
+                activeColor:'red',
+                clickColor:true,
+                // message: "I Am Developer",
+                message:""
             }
         },
         methods: {
@@ -111,7 +108,11 @@ import BaseButton from './BaseButton.vue'
 
             getMessage(){
                 alert("Hello from parent");
-            }
+            },
+            reverseMessage: function() {
+              this.message = this.message.split('').reverse().join('');
+              
+        }
 
             },
             computed:{
@@ -152,8 +153,12 @@ section div{
     padding: 4px;
 }
 
-
 .my::v-deep .my1 {
   background-color: aqua;
+  margin: 5px;
+  border:2px solid;
+  border-radius: 29%;
+  height: 78px;
+  width: 135px;
 }
 </style>
