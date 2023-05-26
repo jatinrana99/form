@@ -23,7 +23,7 @@
 
 
 <!-- for displaying the data -->
-<b-table>
+<table>
     <tr>
     <th>First Name</th>
     <th>Last Name</th>
@@ -34,21 +34,26 @@
  
     <tr v-for="(item,index) in info " v-bind:key="index">
         
-        <td :class="{red: isRed}"> {{ item.fname }} </td>
-        <td :class="{red: isRed}"> {{ item.lname }} </td>
-        <td :class="{red: isRed}"> {{ item.address }} </td>
+        <td :class="{red: isRed}" > {{ item.fname }} {{ index }} </td>
+        <td :class="{red: isRed}"> {{ item.lname }} {{ index }}</td>
+        <td :class="{red: isRed}"> {{ item.address }} {{ index }}</td>
         
 
 
         <td>
-            <input v-on:click="isRed=!isRed" type="checkbox"/>
+            <!-- <input v-on:click="isRed=!isRed" type="checkbox"/> -->
+            <input v-on:click="isRed=!isRed" key="index" type="checkbox"/>{{ index }}
         </td>
     <td>
-            <button v-on:click.prevent="deleteFormData(index) "> X </button>
+        <!-- <i class="fa fa-trash-o"  v-on:click.prevent="deleteFormData(index) "></i> -->
+        <i class="fa-solid fa-trash" v-on:click.prevent="deleteFormData(index) "></i>
+            <!-- <button v-on:click.prevent="deleteFormData(index) "> <i class="fa fa-trash-o" aria-hidden="true"></i> -->
+  <!-- </button> -->
+            <!-- <img alt="Vue logo" src="./assets/logo.png" v-on:click.prevent="deleteFormData(index)" > -->
         </td>
 
     </tr>
-</b-table>
+</table>
 </template>
 
 
@@ -69,7 +74,9 @@
             address:"",
             info:[ ],
             isRed:false,
-            activeColor:'red'
+            activeColor:'red',
+            clickColor:true,
+            
             }
         },
         methods: {
